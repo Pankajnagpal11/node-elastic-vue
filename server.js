@@ -29,8 +29,9 @@ client.ping({
 
 // use the bodyparser as a middleware  
 app.use(bodyParser.json())
+app.set('ipaddress', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 // set port for the app to listen on
-app.set( 'port', process.env.PORT || 3001 );
+app.set( 'port', process.env.OPENSHIFT_NODEJS_PORT  || 8080 );
 // set path to serve static files
 app.use( express.static( path.join( __dirname, 'public' )));
 // enable CORS 
