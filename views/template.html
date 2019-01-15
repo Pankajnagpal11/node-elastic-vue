@@ -108,7 +108,9 @@ var app = new Vue({
     methods: {
         // make an axios request to the server with the current search query
         search: function() {
-            axios.get("http://127.0.0.1:3001/search?q=" + this.query)
+            var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1"; 
+            var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+            axios.get(ipaddress+":"+port+"/search?q=" + this.query)
                 .then(response => {
                     this.results = response.data;
 
